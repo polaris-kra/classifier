@@ -1,5 +1,5 @@
 common:
   model: model_12G3c
 model_12G3c:
-  file_path: 'model_12G3c_v0_1.pt'
+  file_path: 'trained/model_12G3c_v0_1.pt'
   device: 'gpu'
