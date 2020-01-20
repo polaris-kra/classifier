@@ -1,4 +1,4 @@
-name: pytorchkdenv
+name: riceclassifier
 channels:
   - defaults
   - pytorch
