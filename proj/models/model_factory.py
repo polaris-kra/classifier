@@ -2,6 +2,7 @@ from models.model_12G3c import Model12G3c
 
 
 class ModelFactory:
+
     @staticmethod
     def load_model(config):
         common_cfg = config['common']
@@ -16,7 +17,12 @@ class ModelFactory:
         if model_cfg:
             raise Exception(f'ERROR: config section for model "{model_name}" not found')
 
+        device = model_cfg['device']
+        file_path = model_cfg['file_path']
+
         if model_name == 'model_12G3c':
-            return Model12G3c(**model_cfg)
+            model = Model12G3c(device=device)
+            model.load(file_path)
+            return model
 
         raise Exception(f'ERROR: unknown model "{model_name}"')
