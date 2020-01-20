@@ -1,4 +1,4 @@
-name: riceclassifier
+name: classifier
 channels:
   - defaults
   - pytorch
