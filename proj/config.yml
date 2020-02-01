@@ -1,5 +1,9 @@
 common:
+  name: classifier
+  mode: debug
+  template_dir: views
   model: model_12G3c
-model_12G3c:
-  file_path: 'trained/model_12G3c_v0_1.pt'
-  device: 'gpu'
+models:
+  model_12G3c:
+    file_path: 'trained/model_12G3c_v0_1.pt'
+    device: 'gpu'

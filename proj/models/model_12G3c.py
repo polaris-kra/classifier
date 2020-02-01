@@ -8,6 +8,12 @@ VERSION = '0.1'
 
 
 class Model12G3c(ModelBase):
+    """
+    Model trained on 12G Kaggle dataset:
+    https://www.kaggle.com/minhhuy2810/rice-diseases-image-dataset
+    3 classes taken (no Hispa).
+
+    """
     def __init__(self, device, **kwargs):
         super().__init__(device, **kwargs)
 
