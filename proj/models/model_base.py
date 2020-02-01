@@ -1,3 +1,4 @@
+import os
 import torch
 
 
@@ -12,6 +13,28 @@ class ModelBase:
             device = torch.cuda.current_device()
 
         self.device = device
+
+    @staticmethod
+    def version():
+        raise Exception('ERROR: version not implemented')
+
+    def load(self, file_path):
+        if not os.path.exists(file_path):
+            raise Exception(f'ERROR: File "{file_path}" not exists')
+
+        state = torch.load(file_path)
+        state_version = state['version']
+        script_version = self.version()
+
+        if state_version != script_version:
+            raise Exception(f'ERROR: Current script version is {script_version} but loaded is {state_version}')
+
+        model_state = state['model_state']
+
+        return model_state
+
+    def init(self, model_state):
+        raise Exception('ERROR: init not implemented')
 
     def train(self):
         pass

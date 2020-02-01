@@ -1,10 +1,7 @@
-import os
 import torch
 from torchvision.models import GoogLeNet
 
 from models.model_base import ModelBase
-
-VERSION = '0.1'
 
 
 class Model12G3c(ModelBase):
@@ -23,17 +20,11 @@ class Model12G3c(ModelBase):
             2: 'leaf_blast'
         }
 
-    def load(self, file_path):
-        if not os.path.exists(file_path):
-            raise Exception(f'ERROR: File "{file_path}" not exists')
+    @staticmethod
+    def version():
+        return '0.1'
 
-        state = torch.load(file_path)
-        version = state['version']
-
-        if version != VERSION:
-            raise Exception(f'ERROR: Current version is {VERSION} but loaded is {version}')
-
-        model_state = state['model_state']
+    def init(self, model_state):
         model = GoogLeNet()
         model.load_state_dict(model_state)
 

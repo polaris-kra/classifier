@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, request
 from classifier.server import ClassifierServer
 
 
@@ -9,6 +9,33 @@ app = server.create()
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/classify")
+def classify():
+    image = request.files["img"]
+    project = request.args.get("project")
+    uid = request.args.get("uid")
+
+    label = server.process(image, project, uid)
+
+    return label
+
+
+@app.route("/stats")
+def stats():
+    return render_template("stats.html")
+
+
+@app.route("/logs")
+def logs():
+    start = int(request.args.get("start") or 0)
+    count = int(request.args.get("count") or 0)
+    count = min(count, 300)
+
+    logs = [f"log_{i}" for i in range(start, start+count)]
+
+    return render_template("logs.html", logs=logs)
 
 
 if __name__ == "__main__":
