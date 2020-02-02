@@ -17,7 +17,8 @@ def load_model(model_name, config):
 
     if model_name == "model_12G3c":
         model = Model12G3c(device=device)
-        model.load(file_path)
+        state = model.load(file_path)
+        model.init(state)
         return model
 
     raise Exception(f"ERROR: unknown model '{model_name}'")

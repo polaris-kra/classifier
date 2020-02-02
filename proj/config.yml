@@ -8,4 +8,4 @@ common:
 models:
   model_12G3c:
     file_path: '../models/trained/model_12G3c_v0_1.pt'
-    device: 'gpu'
+    device: 'cpu'

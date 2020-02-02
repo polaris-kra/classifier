@@ -21,7 +21,7 @@ class ClassifierServer:
         # create classification model
         model_name = common_cfg["model"]
         model_cfg = self.config["models"][model_name]
-        # self.model = load_model(model_name, model_cfg)
+        self.model = load_model(model_name, model_cfg)
 
         # initialize image store
         self.image_store = ImageStore(self.config)
@@ -41,4 +41,5 @@ class ClassifierServer:
     def classify(self, image):
         # put to store + log(ts, userid, image.size, project, uid, path)
         # classify + log(ts[=store.ts], project, uid, model_name, model_version, label)
+        self.model.predict(image)
         return -1  # return label

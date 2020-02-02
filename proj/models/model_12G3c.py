@@ -1,4 +1,5 @@
 import torch
+import torch.nn as nn
 from torchvision.models import GoogLeNet
 
 from models.model_base import ModelBase
@@ -25,7 +26,11 @@ class Model12G3c(ModelBase):
         return '0.1'
 
     def init(self, model_state):
-        model = GoogLeNet()
+        model = GoogLeNet(transform_input=True,
+                          aux_logits=False,
+                          init_weights=False)
+        n_inputs = model.fc.in_features
+        model.fc = nn.Linear(n_inputs, 3)
         model.load_state_dict(model_state)
 
         self.model = model
@@ -34,6 +39,8 @@ class Model12G3c(ModelBase):
         self.model.eval()
 
         with torch.no_grad():
+            x = torch.from_numpy(x)
+            print(self.model(x))
             prediction = self.model(x.to(self.device)).detach().cpu()
             prediction = list(torch.argmax(prediction, dim=1).numpy())
 

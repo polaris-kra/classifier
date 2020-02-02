@@ -1,3 +1,5 @@
+from PIL import Image
+import numpy as np
 from flask import render_template, request
 from classifier.server import ClassifierServer
 
@@ -25,6 +27,9 @@ def classify():
 
     if "img" in request.files:
         image = request.files["img"]
+        image = np.array(Image.open(image))
+        image = np.swapaxes(image, 0, 2)
+        image = np.expand_dims(image, 0)
         class_res = server.classify(image)
 
     return render_template("classify.html", class_res=class_res)
@@ -36,9 +41,9 @@ def logs():
     count = int(request.args.get("count") or 0)
     count = min(count, 300)
 
-    logs = [f"log_{i}" for i in range(start, start+count)]
+    logs_ = [f"log_{i}" for i in range(start, start+count)]
 
-    return render_template("logs.html", logs=logs)
+    return render_template("logs.html", logs=logs_)
 
 
 if __name__ == "__main__":
