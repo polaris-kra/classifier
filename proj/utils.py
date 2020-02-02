@@ -11,25 +11,9 @@ def read_config(config_path="../config.yml"):
         return yaml.load(file, yaml.FullLoader)
 
 
-def load_model(config):
-    common_cfg = config["common"]
-    if common_cfg is None:
-        raise Exception("ERROR: no common section in config")
-
-    model_name = config["model"]
-    if model_name is None:
-        raise Exception('ERROR: no model_name entry in common config section')
-
-    models_cfg = config["models"]
-    if models_cfg is None:
-        raise Exception("ERROR: no models section in config")
-
-    model_cfg = models_cfg["model_name"]
-    if model_cfg:
-        raise Exception(f"ERROR: config section for model '{model_name}' not found")
-
-    device = model_cfg["device"]
-    file_path = model_cfg["file_path"]
+def load_model(model_name, config):
+    device = config["device"]
+    file_path = config["file_path"]
 
     if model_name == "model_12G3c":
         model = Model12G3c(device=device)

@@ -11,20 +11,23 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/classify")
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+
+@app.route("/classify", methods=["GET", "POST"])
 def classify():
-    image = request.files["img"]
-    project = request.args.get("project")
-    uid = request.args.get("uid")
+    if request.method == "GET":
+        return render_template("classify.html", class_res=None)
 
-    label = server.process(image, project, uid)
+    class_res = None
 
-    return label
+    if "img" in request.files:
+        image = request.files["img"]
+        class_res = server.classify(image)
 
-
-@app.route("/stats")
-def stats():
-    return render_template("stats.html")
+    return render_template("classify.html", class_res=class_res)
 
 
 @app.route("/logs")

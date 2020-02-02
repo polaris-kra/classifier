@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Classifier</title>
-  </head>
-  <body>
-    <p>Hello. I am classifier. A heart of your system.</p>
-    <a href="{{ url_for('stats') }}">stats</a>
-    <a href="{{ url_for('logs') }}">logs</a>
-  </body>
-</html>
+{% extends "master.html" %}
+
+{% block content %}
+
+<div class="jumbotron polaris-jumbotron">
+  <div>
+    <h1>Добро пожаловать!</h1>
+    <p>Классификатор болезней риса</p>
+  </div>
+  <a href="{{ url_for('login') }}">начать</a>
+</div>
+
+{% endblock %}

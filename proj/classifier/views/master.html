@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Polaris</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery-3.4.1.slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/master.css') }}">
+    <link rel="shortcut icon" href="">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand navbar-light polaris-header">
+      <a class="text-white navbar-brand" href="{{url_for('index')}}">Домой</a>
+    </nav>
+
+    {% block content %}
+
+    {% endblock %}
+
+  </body>
+</html>

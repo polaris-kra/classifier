@@ -1,0 +1,21 @@
+{% extends "master.html" %}
+
+{% block content %}
+
+<div class="jumbotron polaris-jumbotron">
+  <div class="container polaris-login-form">
+    <p>Выберите изображение для классификации</p>
+    <form action="{{ url_for('classify') }}" enctype="multipart/form-data" method="POST">
+      <input type="file" class="btn btn-primary" name="img">
+      <input type="submit" class="btn btn-primary" value="Отправить">
+    </form>
+
+    {% if class_res != None: %}
+    <div class="container">
+      <p>Выявлена болезнь: {{class_res}}</p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
