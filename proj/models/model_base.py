@@ -4,6 +4,7 @@ import torch
 
 class ModelBase:
     def __init__(self, device, **kwargs):
+        self.preprocess = None
         self.model = None
 
         if device.lower() == 'gpu':
@@ -30,8 +31,10 @@ class ModelBase:
             raise Exception(f'ERROR: Current script version is {script_version} but loaded is {state_version}')
 
         model_state = state['model_state']
+        preprocess = state["preprocess"]
 
-        return model_state
+        self.preprocess = preprocess
+        self.model = self.init(model_state)
 
     def init(self, model_state):
         raise Exception('ERROR: init not implemented')
@@ -39,5 +42,5 @@ class ModelBase:
     def train(self):
         pass
 
-    def predict(self, x):
+    def predict(self, img):
         raise Exception('ERROR: predictions not implemented')

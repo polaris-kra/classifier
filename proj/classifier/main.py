@@ -21,18 +21,16 @@ def login():
 @app.route("/classify", methods=["GET", "POST"])
 def classify():
     if request.method == "GET":
-        return render_template("classify.html", class_res=None)
+        return render_template("classify.html", result=None)
 
-    class_res = None
+    result = None
 
     if "img" in request.files:
         image = request.files["img"]
-        image = np.array(Image.open(image))
-        image = np.swapaxes(image, 0, 2)
-        image = np.expand_dims(image, 0)
-        class_res = server.classify(image)
+        image = Image.open(image)
+        result = server.classify(image)
 
-    return render_template("classify.html", class_res=class_res)
+    return render_template("classify.html", result=result)
 
 
 @app.route("/logs")

@@ -1,3 +1,4 @@
+import numpy as np
 from flask import Flask
 from utils import read_config, load_model
 from classifier.store import ImageStore
@@ -41,5 +42,4 @@ class ClassifierServer:
     def classify(self, image):
         # put to store + log(ts, userid, image.size, project, uid, path)
         # classify + log(ts[=store.ts], project, uid, model_name, model_version, label)
-        self.model.predict(image)
-        return -1  # return label
+        return self.model.predict(image)

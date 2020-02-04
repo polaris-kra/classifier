@@ -5,14 +5,31 @@
 <div class="jumbotron polaris-jumbotron">
   <div class="container polaris-login-form">
     <p>Выберите изображение для классификации</p>
+    <div class="ml-2 col-sm-6">
+      <img src="https://placehold.it/80x80" id="img-preview" class="img">
+    </div>
     <form action="{{ url_for('classify') }}" enctype="multipart/form-data" method="POST">
-      <input type="file" class="btn btn-primary" name="img">
+      <label class="btn btn-primary">
+          Browse <input type="file" name="img" onchange="readURL(this);" hidden>
+      </label>
+      <br>
       <input type="submit" class="btn btn-primary" value="Отправить">
     </form>
 
-    {% if class_res != None: %}
+    {% if result != None: %}
     <div class="container">
-      <p>Выявлена болезнь: {{class_res}}</p>
+      {% set diseases = result["diseases"] %}
+      {% if diseases|length > 0 %}
+        <p>Выявлены болезни: {{",".join(diseases)}}</p>
+        <ul>
+          {% set details = result["details"] %}
+          {% for class_name in details %}
+          <li>{{ class_name }}:{{ 100*details[class_name]|round(0) }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Болезни не выявлены</p>
+      {% endif %}
     </div>
     {% endif %}
   </div>

@@ -14,11 +14,11 @@ def read_config(config_path="../config.yml"):
 def load_model(model_name, config):
     device = config["device"]
     file_path = config["file_path"]
+    threshold = config["threshold"]
 
     if model_name == "model_12G3c":
-        model = Model12G3c(device=device)
-        state = model.load(file_path)
-        model.init(state)
+        model = Model12G3c(threshold=threshold, device=device)
+        model.load(file_path)
         return model
 
     raise Exception(f"ERROR: unknown model '{model_name}'")
