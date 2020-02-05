@@ -1,5 +1,4 @@
 from PIL import Image
-import numpy as np
 from flask import render_template, request
 from classifier.server import ClassifierServer
 

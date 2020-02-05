@@ -3,21 +3,23 @@
 {% block content %}
 
 <div class="jumbotron polaris-jumbotron">
-  <div class="container polaris-login-form">
+  <div class="container polaris-emulator-container">
     <p>Выберите изображение для классификации</p>
     <div class="ml-2 col-sm-6">
-      <img src="https://placehold.it/80x80" id="img-preview" class="img">
+      <img src="https://placehold.it/80x80" id="img-preview" class="polaris-img-preview">
     </div>
-    <form action="{{ url_for('classify') }}" enctype="multipart/form-data" method="POST">
-      <label class="btn btn-primary">
-          Browse <input type="file" name="img" onchange="readURL(this);" hidden>
-      </label>
-      <br>
-      <input type="submit" class="btn btn-primary" value="Отправить">
-    </form>
+    <div class="text-center">
+      <form action="{{ url_for('classify') }}" enctype="multipart/form-data" method="POST">
+        <label class="btn btn-success">
+            Фото <input type="file" name="img" onchange="readURL(this);" hidden>
+        </label>
+        <br>
+        <input type="submit" class="btn btn-primary" id="btn-analysis" value="Анализ">
+      </form>
+    </div>
 
     {% if result != None: %}
-    <div class="container">
+    <div class="container" id="results-block">
       {% set diseases = result["diseases"] %}
       {% if diseases|length > 0 %}
         <p>Выявлены болезни: {{",".join(diseases)}}</p>
