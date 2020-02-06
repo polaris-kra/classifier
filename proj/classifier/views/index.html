@@ -2,12 +2,19 @@
 
 {% block content %}
 
-<div class="jumbotron polaris-jumbotron">
-  <div>
-    <h1>Добро пожаловать!</h1>
-    <p>Классификатор болезней риса</p>
+<div>
+  <div class="polaris-welcome-block">
+    <h2 class="polaris-welcome-text">Добро пожаловать!</h2>
+    <br>
+    <p>
+      <b>Polaris™</b>
+      <br>
+      Классификатор болезней риса
+    </p>
   </div>
-  <a href="{{ url_for('login') }}">начать</a>
+  <div class="text-center">
+    <button class="btn btn-primary" onclick="location.href='{{url_for('login')}}';">Войти</button>
+  </div>
 </div>
 
 {% endblock %}
