@@ -3,36 +3,86 @@
 {% block content %}
 
 <div class="container">
-  <p>Выберите изображение для классификации</p>
+  <div class="text-center">
+    <p>Выберите изображение для классификации</p>
+  </div>
   <div class="polaris-img-block">
-    <img src="https://placehold.it/80x80" id="img-preview" class="polaris-img-preview">
+    <img src="{{ url_for('static', filename='img/placeholder.png') }}" id="img-preview" class="polaris-img-preview">
   </div>
   <div class="text-center">
     <form action="{{ url_for('classify') }}" enctype="multipart/form-data" method="POST">
-      <label class="btn btn-success">
-          Фото <input type="file" name="img" onchange="readURL(this);" hidden>
+      <label class="btn btn-success">Фото
+        <input type="file" name="img" onchange="javascript:readURL(this);" hidden>
       </label>
       <br>
-      <input type="submit" class="btn btn-primary polaris-btn-analyze" id="btn-analysis" value="Анализ">
+      <input type="submit" class="btn btn-primary polaris-btn-analyze" id="btn-analysis-id" value="Анализ">
     </form>
   </div>
 
   {% if result != None: %}
-  <div class="container" id="results-block">
+  <div class="container text-center" id="results-block-id">
+    <div id="diseases-result-id">
     {% set diseases = result["diseases"] %}
     {% if diseases|length > 0 %}
-      <p>Выявлены болезни: {{",".join(diseases)}}</p>
-      <ul>
-        {% set details = result["details"] %}
-        {% for class_name in details %}
-        <li>{{ class_name }}:{{ 100*details[class_name]|round(0) }}</li>
+      <p class="polaris-diseases-detected">Выявлены болезни:
+        {% for disease in diseases %}
+        <br><span class="text-danger"><b>{{disease}}</b></span>
         {% endfor %}
-      </ul>
+      </p>
+      <a href="javascript:displayDetails(true);">подробнее</a>
     {% else %}
-      <p>Болезни не выявлены</p>
+    <p class="polaris-welcome-text"><b>Болезни не выявлены</b></p>
     {% endif %}
+    </div>
+    <div id="diseases-details-id">
+      {% set details = result["details"] %}
+      <table class="polaris-details-table">
+        {% for class_name in details %}
+        {% set pct = 100*details[class_name]|round|int %}
+        {% set disease_class = 'text-danger' if pct >= 80 else '' %}
+        <tr class="{{ disease_class }}">
+          <td class="polaris-disease-td">{{ class_name }}</td>
+          <td class="polaris-disease-pct-td">{{ pct }}%</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <a href="javascript:displayDetails(false);">скрыть</a>
+    </div>
   </div>
   {% endif %}
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            $('#img-preview')
+                .attr('src', e.target.result);
+
+            document.getElementById("btn-analysis-id").style.display = 'initial';
+            document.getElementById("results-block-id").style.visibility = 'hidden';
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function displayDetails(display) {
+    resultDiv = document.getElementById("diseases-result-id");
+    detailsDiv = document.getElementById("diseases-details-id");
+
+    if (display) {
+        resultDiv.style.display = 'none';
+        detailsDiv.style.display = 'initial';
+    }
+    else{
+        resultDiv.style.display = 'initial';
+        detailsDiv.style.display = 'none';
+    }
+}
 
 {% endblock %}

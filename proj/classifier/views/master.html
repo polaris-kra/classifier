@@ -20,8 +20,15 @@
         {% endblock %}
 
       </div>
-      <div class='polaris-device-button' onclick="location.href='{{url_for('index')}}';">
-      </div>
+      <div class='polaris-device-button' onclick="location.href='{{url_for('index')}}';"></div>
     </div>
   </body>
+
+  <script>
+
+    {% block scripts %}
+    {% endblock %}
+
+  </script>
+
 </html>

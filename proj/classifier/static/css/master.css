@@ -69,7 +69,26 @@
     margin-top: 20px;
 }
 
+.polaris-diseases-detected{
+    margin-bottom: 5px;
+}
 
-#btn-analysis{
-    visibility: hidden;
+.polaris-details-table{
+    width: 100%;
+}
+
+.polaris-disease-td{
+    text-align: left;
+}
+
+.polaris-disease-pct-td{
+    text-align: right;
+}
+
+#btn-analysis-id{
+    display: none;
+}
+
+#diseases-details-id{
+    display: none;
 }
