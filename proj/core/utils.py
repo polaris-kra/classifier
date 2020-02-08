@@ -3,7 +3,7 @@ import yaml
 from models.model_12G3c import Model12G3c
 
 
-def read_config(config_path="../config.yml"):
+def read_config(config_path="config.yml"):
     if not os.path.exists(config_path):
         raise Exception(f"ERROR: config file {config_path} not found")
 

@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 from torchvision.models import GoogLeNet
 
-from models.model_base import ModelBase
+from .model_base import ModelBase
 
 
 ID_TO_CLASSES = {

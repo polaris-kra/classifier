@@ -1,12 +1,12 @@
-common:
+server:
   name: classifier
+  host: 127.0.0.1
   port: 1909
-  mode: debug
-  template_dir: views
+  debug: False
   model: model_12G3c
   datastore_path: '/home/sergey-msu/Work/pit/classifier'
 models:
   model_12G3c:
-    file_path: '../models/trained/model_12G3c_v0_1.pt'
+    file_path: 'models/trained/model_12G3c_v0_1.pt'
     device: 'cpu'
     threshold: 0.7
