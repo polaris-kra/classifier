@@ -67,9 +67,9 @@ class Model12G3c(ModelBase):
             result = {
                 "diseases": diseases,
                 "details": {
-                    ID_TO_RUS[1]: preds[1],  # healthy
-                    ID_TO_RUS[0]: preds[0],  # brown_spot
-                    ID_TO_RUS[2]: preds[2]   # leaf_blast
+                    ID_TO_RUS[1]: float(preds[1]),  # healthy
+                    ID_TO_RUS[0]: float(preds[0]),  # brown_spot
+                    ID_TO_RUS[2]: float(preds[2])   # leaf_blast
                 }
             }
             return result

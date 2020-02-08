@@ -85,6 +85,19 @@
     text-align: right;
 }
 
+.polaris-img-wait{
+    width: 80px;
+    height: 80px;
+}
+
+#wait-block-id{
+    display: none;
+}
+
+#results-block-id{
+    display: none;
+}
+
 #btn-analysis-id{
     display: none;
 }

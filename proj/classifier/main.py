@@ -1,5 +1,6 @@
 from PIL import Image
 from flask import render_template, request
+from flask import jsonify
 from classifier.server import ClassifierServer
 
 
@@ -17,11 +18,14 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/classify", methods=["GET", "POST"])
+@app.route("/classify", methods=["GET"])
 def classify():
     if request.method == "GET":
-        return render_template("classify.html", result=None)
+        return render_template("classify.html")
 
+
+@app.route("/classify_ajax", methods=["POST"])
+def classify_ajax():
     result = None
 
     if "img" in request.files:
@@ -29,7 +33,7 @@ def classify():
         image = Image.open(image)
         result = server.classify(image)
 
-    return render_template("classify.html", result=result)
+    return jsonify({'result': result})
 
 
 @app.route("/logs")
