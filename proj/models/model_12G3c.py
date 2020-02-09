@@ -35,6 +35,10 @@ class Model12G3c(ModelBase):
     def version():
         return '0.1'
 
+    @staticmethod
+    def info():
+        return f"Model12G3c v{Model12G3c.version()}"
+
     def init(self, model_state):
         model = GoogLeNet(transform_input=True,
                           aux_logits=False,

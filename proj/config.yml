@@ -1,10 +1,18 @@
-server:
+app:
   name: classifier
   host: 127.0.0.1
   port: 1909
   debug: False
   model: model_12G3c
   datastore_path: '/home/sergey-msu/Work/pit/classifier'
+
+logger:
+  name: 'classifier'
+  path: '/home/sergey-msu/Work/startup/polaris/_logs/classifier/app.log'
+  level: 'DEBUG'
+  when: 'D'
+  interval: 1
+
 models:
   model_12G3c:
     file_path: 'models/trained/model_12G3c_v0_1.pt'

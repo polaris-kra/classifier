@@ -19,6 +19,10 @@ class ModelBase:
     def version():
         raise Exception('ERROR: version not implemented')
 
+    @staticmethod
+    def info():
+        raise Exception('ERROR: info not implemented')
+
     def load(self, file_path):
         if not os.path.exists(file_path):
             raise Exception(f'ERROR: File "{file_path}" not exists')
