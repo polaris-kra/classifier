@@ -1,13 +1,6 @@
 numpy==1.16.2
 pandas==0.24.2
-matplotlib==3.0.3
-pillow==5.4.1
-plotly==3.7.0
 scikit-learn==0.20.3
-seaborn==0.9.0
-jupyter==1.0.0
-torch==1.2.0
-torchvision==0.4.0
 alembic==0.9.9
 blinker==1.4
 chardet==3.0.4
@@ -19,9 +12,9 @@ Flask-Login==0.4.1
 Flask-Migrate==2.1.1
 Flask-OAuth==0.12
 Flask-OAuthlib==0.9.4
-Flask-Restful==0.3.8
 Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
+Flask-Restful==0.3.8
 httplib2==0.11.3
 idna==2.6
 itsdangerous==0.24
@@ -43,3 +36,6 @@ URLObject==2.4.3
 Werkzeug==0.14.1
 WTForms==2.1
 pyyaml==5.3
+torch==1.2.0
+torchvision==0.4.0
+pillow==5.4.1
