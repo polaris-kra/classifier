@@ -13,7 +13,7 @@ def read_config(config_path="config.yml"):
 
 def load_model(model_name, config):
     device = config["device"]
-    file_path = config["file_path"]
+    file_path = get_secret('models')[model_name]
     threshold = config["threshold"]
 
     if model_name == "model_12G3c":
@@ -22,3 +22,9 @@ def load_model(model_name, config):
         return model
 
     raise Exception(f"ERROR: unknown model '{model_name}'")
+
+
+def get_secret(key, config_path="config.yml"):
+    config = read_config(config_path)
+    secret_path = config["app"]["secret_path"]
+    return read_config(secret_path)["classifier"][key]
