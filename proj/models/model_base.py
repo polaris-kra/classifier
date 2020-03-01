@@ -3,7 +3,8 @@ import torch
 
 
 class ModelBase:
-    def __init__(self, device, **kwargs):
+    def __init__(self, device, logger, **kwargs):
+        self.logger = logger
         self.preprocess = None
         self.model = None
 
@@ -14,6 +15,8 @@ class ModelBase:
             device = torch.cuda.current_device()
 
         self.device = device
+
+        self.logger.log(10, f'model is running on device: {device}')
 
     @staticmethod
     def version():
@@ -27,7 +30,8 @@ class ModelBase:
         if not os.path.exists(file_path):
             raise Exception(f'ERROR: File "{file_path}" not exists')
 
-        state = torch.load(file_path)
+        map_location = torch.device('cpu') if self.device == 'cpu' else None
+        state = torch.load(file_path, map_location=map_location)
         state_version = state['version']
         script_version = self.version()
 

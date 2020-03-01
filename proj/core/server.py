@@ -74,7 +74,7 @@ class ClassifierServer:
         try:
             model_name = app_cfg["model"]
             model_cfg = self.config["models"][model_name]
-            model = load_model(model_name, model_cfg)
+            model = load_model(model_name, model_cfg, logger=self.logger)
 
             self.print("model: OK")
             self.model = model

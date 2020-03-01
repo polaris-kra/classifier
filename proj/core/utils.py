@@ -11,13 +11,13 @@ def read_config(config_path="config.yml"):
         return yaml.load(file, yaml.FullLoader)
 
 
-def load_model(model_name, config):
+def load_model(model_name, config, **kwargs):
     device = config["device"]
     file_path = get_secret('models')[model_name]
     threshold = config["threshold"]
 
     if model_name == "model_12G3c":
-        model = Model12G3c(threshold=threshold, device=device)
+        model = Model12G3c(threshold=threshold, device=device, **kwargs)
         model.load(file_path)
         return model
 
